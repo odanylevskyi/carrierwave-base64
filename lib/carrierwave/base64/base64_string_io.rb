@@ -50,6 +50,7 @@ module Carrierwave
         detected_type = Marcel::Magic.by_magic(bytes)
         content_type = (detected_type && detected_type.type) ||
                        description.split(';base64').first
+        mime_type = MIME::Types[content_type].last
         unless mime_type
           raise Carrierwave::Base64::UnknownMimeTypeError,
                 "Unknown MIME type: #{content_type}"
